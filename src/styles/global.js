@@ -1,6 +1,8 @@
 // NOTA_ESTUDO: O estilo abaixo precisa ser usado como um componente: <GlobalStyle />
 import { createGlobalStyle } from "styled-components";
 
+import "font-awesome/css/font-awesome.css";
+
 const GlobalStyle = createGlobalStyle`
   *{
     box-sizing: border-box;

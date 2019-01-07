@@ -38,6 +38,7 @@ export const Form = styled.form`
     height: 55px;
     margin-left: 10px;
     padding: 0 20px;
+    width: 80px;
 
     &:hover {
       background: #52d89f;

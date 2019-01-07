@@ -176,3 +176,13 @@ yarn add moment
 ```
 
 **Um exemplo pode ser encontrado em /src/pages/Main/index.js**
+
+### FONT-AWESOME
+
+Fonte com ícones
+
+```bash
+yarn add font-awesome
+```
+
+**Um exemplo pode ser encontrado em /src/styles/global.js**
