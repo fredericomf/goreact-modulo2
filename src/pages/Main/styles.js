@@ -16,7 +16,10 @@ export const Form = styled.form`
 
   input {
     background: #fff;
-    border: 0;
+
+    /* O STYLED-COMPONENTS permite receber os parametros passados no componente... */
+    border: ${props => (props.withError ? "2px solid #F00" : 0)};
+
     border-radius: 3px;
     color: #444;
     font-size: 18px;
