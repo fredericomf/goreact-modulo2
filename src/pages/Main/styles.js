@@ -1,16 +1,14 @@
-import React from "react";
 import styled from "styled-components";
 
-import logo from "../assets/logo.png";
-
-const Container = styled.div`
+// NOTA_ESTUDO: Preciso usar o export antes das constantes para enxergá-las no index.js
+export const Container = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
   padding-top: 60px;
 `;
 
-const Form = styled.form`
+export const Form = styled.form`
   display: flex;
   margin-top: 20px;
   max-width: 400px;
@@ -43,16 +41,3 @@ const Form = styled.form`
     }
   }
 `;
-
-const Main = () => (
-  <Container>
-    <img src={logo} alt="Github Compare" />
-
-    <Form>
-      <input type="text" placeholder="usuário/respositório" />
-      <button type="submit">OK</button>
-    </Form>
-  </Container>
-);
-
-export default Main;
