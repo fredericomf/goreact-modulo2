@@ -166,3 +166,13 @@ yarn add prop-types
 ```
 
 **Um exemplo pode ser encontrado em /src/components/CompareList/index.js**
+
+### MOMENT
+
+Biblioteca para trabalhar com datas e horas
+
+```bash
+yarn add moment
+```
+
+**Um exemplo pode ser encontrado em /src/pages/Main/index.js**

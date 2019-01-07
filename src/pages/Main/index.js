@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import api from "../../services/api";
 
+import moment from "moment";
+
 import logo from "../../assets/logo.png";
 
 import { Container, Form } from "./styles";
@@ -17,11 +19,17 @@ export default class Main extends Component {
     e.preventDefault();
 
     try {
-      const response = await api.get(`/repos/${this.state.repositoryInput}`);
+      // NOTA_ESTUDO: data: repository = Estou desentruturando o data e renomeando como repository
+      const { data: repository } = await api.get(
+        `/repos/${this.state.repositoryInput}`
+      );
+
+      // NOTA_ESTUDO: A informação não deve ser manipulada no render() do componente que vamos usar (CompareList). Sempre tratar antes.
+      repository.lastCommit = moment(repository.pushed_at).fromNow();
 
       this.setState({
         repositoryInput: "",
-        repositories: [...this.state.repositories, response.data]
+        repositories: [...this.state.repositories, repository]
       });
     } catch (err) {
       console.log(err);
