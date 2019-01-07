@@ -146,3 +146,23 @@ yarn add styled-components
 ```
 
 \*NOTA: Para faciliar o desenvolvimento, instalar a extenção: vscode-styled-components [Julien Poissonnier]. Essa extenção vai dar um sintaxe highlighting nos styled components.
+
+### AXIOS
+
+Biblioteca para fazer chamadas ajax
+
+```bash
+yarn add axios
+```
+
+**Exemplo de configuração inicial em /src/services/api.js**
+
+### PROP_TYPES
+
+Biblioteca para fazer tipagem no nosso código
+
+```bash
+yarn add prop-types
+```
+
+**Um exemplo pode ser encontrado em /src/components/CompareList/index.js**
