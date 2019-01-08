@@ -10,12 +10,21 @@ import { Container, Form } from "./styles";
 import CompareList from "../../components/CompareList";
 
 export default class Main extends Component {
-  state = {
-    loading: false,
-    repositoryError: false,
-    repositoryInput: "",
-    repositories: []
-  };
+  constructor(props) {
+    super(props);
+    var reps = [];
+
+    if (window.localStorage.getItem("repositories") !== null) {
+      reps = JSON.parse(window.localStorage.getItem("repositories"));
+    }
+
+    this.state = {
+      loading: false,
+      repositoryError: false,
+      repositoryInput: "",
+      repositories: reps
+    };
+  }
 
   handleAddRepository = async e => {
     e.preventDefault();
@@ -31,11 +40,19 @@ export default class Main extends Component {
       // NOTA_ESTUDO: A informação não deve ser manipulada no render() do componente que vamos usar (CompareList). Sempre tratar antes.
       repository.lastCommit = moment(repository.pushed_at).fromNow();
 
-      this.setState({
-        repositoryInput: "",
-        repositories: [...this.state.repositories, repository],
-        repositoryError: false
-      });
+      this.setState(
+        {
+          repositoryInput: "",
+          repositories: [...this.state.repositories, repository],
+          repositoryError: false
+        },
+        () => {
+          window.localStorage.setItem(
+            "repositories",
+            JSON.stringify(this.state.repositories)
+          );
+        }
+      );
     } catch (err) {
       this.setState({ repositoryError: true });
     } finally {
