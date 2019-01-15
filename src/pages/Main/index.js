@@ -60,6 +60,51 @@ export default class Main extends Component {
     }
   };
 
+  handleDelete = repository => {
+    if (window.confirm("Are you sure?")) {
+      const reps = this.state.repositories.filter((value, index, arr) => {
+        return value.id !== repository.id;
+      });
+
+      window.localStorage.setItem("repositories", JSON.stringify(reps));
+
+      this.setState({
+        repositories: reps
+      });
+    }
+  };
+
+  handleRefresh = async oldRepository => {
+    try {
+      const { data: repository } = await api.get(
+        `/repos/${oldRepository.full_name}`
+      );
+
+      repository.lastCommit = moment(repository.pushed_at).fromNow();
+
+      const index = this.state.repositories.indexOf(oldRepository);
+
+      const reps = this.state.repositories;
+      reps[index] = repository;
+
+      this.setState(
+        {
+          repositories: reps
+        },
+        () => {
+          window.localStorage.setItem(
+            "repositories",
+            JSON.stringify(this.state.repositories)
+          );
+        }
+      );
+    } catch (err) {
+      this.setState({ repositoryError: true });
+    } finally {
+      this.setState({ loading: false });
+    }
+  };
+
   render() {
     return (
       <Container>
@@ -84,7 +129,11 @@ export default class Main extends Component {
           </button>
         </Form>
 
-        <CompareList repositories={this.state.repositories} />
+        <CompareList
+          repositories={this.state.repositories}
+          onDelete={this.handleDelete}
+          onRefresh={this.handleRefresh}
+        />
       </Container>
     );
   }

@@ -15,6 +15,26 @@ export const Repository = styled.div`
   margin: 0 10px;
   width: 250px;
 
+  .mainMenu {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0 10px;
+
+    button {
+      background: transparent;
+      border: none;
+      font-size: 15px;
+    }
+
+    button.delete {
+      color: #f00;
+    }
+
+    button.refresh {
+      color: #09990d;
+    }
+  }
+
   header {
     align-items: center;
     display: flex;

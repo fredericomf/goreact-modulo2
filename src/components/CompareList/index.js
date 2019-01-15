@@ -3,34 +3,54 @@ import PropTypes from "prop-types";
 
 import { Container, Repository } from "./styles";
 
-const CompareList = ({ repositories }) => (
-  <Container>
-    {repositories.map(repository => (
-      <Repository key={repository.id}>
-        <header>
-          <img src={repository.owner.avatar_url} alt={repository.owner.login} />
-          <strong>{repository.name}</strong>
-          <small>{repository.owner.login}</small>
-        </header>
+class CompareList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-        <ul>
-          <li>
-            {repository.stargazers_count} <small>stars</small>
-          </li>
-          <li>
-            {repository.forks_count} <small>forks</small>
-          </li>
-          <li>
-            {repository.open_issues_count} <small>issues</small>
-          </li>
-          <li>
-            {repository.lastCommit} <small>last commit</small>
-          </li>
-        </ul>
-      </Repository>
-    ))}
-  </Container>
-);
+  render() {
+    const { repositories, onDelete, onRefresh } = this.props;
+    return (
+      <Container>
+        {repositories.map(repository => (
+          <Repository key={repository.id}>
+            <div className="mainMenu">
+              <button className="delete" onClick={e => onDelete(repository)}>
+                <i className="fa fa-trash-o" />
+              </button>
+              <button className="refresh" onClick={e => onRefresh(repository)}>
+                <i className="fa fa-refresh" />
+              </button>
+            </div>
+            <header>
+              <img
+                src={repository.owner.avatar_url}
+                alt={repository.owner.login}
+              />
+              <strong>{repository.name}</strong>
+              <small>{repository.owner.login}</small>
+            </header>
+
+            <ul>
+              <li>
+                {repository.stargazers_count} <small>stars</small>
+              </li>
+              <li>
+                {repository.forks_count} <small>forks</small>
+              </li>
+              <li>
+                {repository.open_issues_count} <small>issues</small>
+              </li>
+              <li>
+                {repository.lastCommit} <small>last commit</small>
+              </li>
+            </ul>
+          </Repository>
+        ))}
+      </Container>
+    );
+  }
+}
 
 CompareList.propTypes = {
   repositories: PropTypes.arrayOf(
